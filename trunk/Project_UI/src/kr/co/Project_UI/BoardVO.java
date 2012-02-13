@@ -1,7 +1,7 @@
 package kr.co.Project_UI;
 
 public class BoardVO {
-	String postNo;
+	int postNo;
 	String writer;
 	String writerId;
 	String title;
@@ -9,7 +9,7 @@ public class BoardVO {
 	int likeCnt;
 	String regDate;
 	
-	public BoardVO(String postNo, String writer, String writerId, String title,
+	public BoardVO(int postNo, String writer, String writerId, String title,
 			String content, int likeCnt, String regDate) {
 		super();
 		this.postNo = postNo;
@@ -21,10 +21,10 @@ public class BoardVO {
 		this.regDate = regDate;
 	}
 	
-	public String getPostNo() {
+	public int getPostNo() {
 		return postNo;
 	}
-	public void setPostNo(String postNo) {
+	public void setPostNo(int postNo) {
 		this.postNo = postNo;
 	}
 	public String getWriter() {

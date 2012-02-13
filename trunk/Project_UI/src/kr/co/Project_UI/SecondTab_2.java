@@ -16,7 +16,6 @@ public class SecondTab_2 extends Activity{
 		
 		prevBtn.setOnClickListener(new OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				SecondTab parent = ((SecondTab)getParent());
 				parent.onBackPressed();

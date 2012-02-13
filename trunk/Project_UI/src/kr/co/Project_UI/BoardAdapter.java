@@ -3,7 +3,6 @@ package kr.co.Project_UI;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ public class BoardAdapter extends ArrayAdapter<BoardVO> {
 	public BoardAdapter(Context context, int textViewResourceId,
 			ArrayList<BoardVO> items) {
 		super(context, textViewResourceId, items);
-		Log.d("mydebug", "»ý¼ºÀÚ");
 		this.items = items;
 		this.textViewResourceId = textViewResourceId;
 		vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
