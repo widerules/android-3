@@ -34,6 +34,5 @@ public class Project_UIActivity extends TabActivity {
 		
 		tabHost.setCurrentTab(0);
 		
-		
     }
 }

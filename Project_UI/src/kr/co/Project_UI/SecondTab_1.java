@@ -1,23 +1,30 @@
 package kr.co.Project_UI;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 public class SecondTab_1 extends Activity {
+	ArrayList<BoardVO> bList;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.secondtab_1_layout);
 		
-		String[] firstArray = getResources().getStringArray(R.array.test);
-		ListView firstListView = (ListView) findViewById(R.id.list_view1);
-		ArrayAdapter<String> firstAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, firstArray);
-		firstListView.setAdapter(firstAdapter);
+		bList = new ArrayList<BoardVO>();
+		bList.add(new BoardVO(null, "윤영석1", null, "첫번쨰 글", null, 4, null));
+		bList.add(new BoardVO(null, "윤영석2", null, "첫번쨰 글", null, 4, null));
+		bList.add(new BoardVO(null, "윤영석3", null, "첫번쨰 글", null, 4, null));
+		BoardAdapter adapter = new BoardAdapter(this, R.layout.boardui , bList);
+		ListView firstListView = (ListView)findViewById(R.id.list_view1);
+		firstListView.setAdapter(adapter);
+		Log.d("mydebug", "setadapter");
 		Button nextBtn = (Button)findViewById(R.id.nextBtn);
 	
 		nextBtn.setOnClickListener(new View.OnClickListener() {
