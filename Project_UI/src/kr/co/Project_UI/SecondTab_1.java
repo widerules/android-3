@@ -11,20 +11,18 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class SecondTab_1 extends Activity {
+	BoardHelper boardHelper = new BoardHelper();
 	ArrayList<BoardVO> bList;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.secondtab_1_layout);
 		
-		bList = new ArrayList<BoardVO>();
-		bList.add(new BoardVO(null, "윤영석1", null, "첫번쨰 글", null, 4, null));
-		bList.add(new BoardVO(null, "윤영석2", null, "첫번쨰 글", null, 4, null));
-		bList.add(new BoardVO(null, "윤영석3", null, "첫번쨰 글", null, 4, null));
+		bList = boardHelper.getList();
+		
 		BoardAdapter adapter = new BoardAdapter(this, R.layout.boardui , bList);
 		ListView firstListView = (ListView)findViewById(R.id.list_view1);
 		firstListView.setAdapter(adapter);
-		Log.d("mydebug", "setadapter");
 		Button nextBtn = (Button)findViewById(R.id.nextBtn);
 	
 		nextBtn.setOnClickListener(new View.OnClickListener() {
