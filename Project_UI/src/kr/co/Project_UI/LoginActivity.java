@@ -1,7 +1,5 @@
 package kr.co.Project_UI;
 
-import java.net.URL;
-
 import org.json.JSONObject;
 
 import util.ImageDownloader;
@@ -9,8 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -33,9 +29,6 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-		ImageView testImg = (ImageView)findViewById(R.id.testImg);
-		ImageDownloader imageDownloader = new ImageDownloader();
-		imageDownloader.download("http://graph.facebook.com/100002183492586/picture?type=square", testImg);
 		login();
 	}
 	
