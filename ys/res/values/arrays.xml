@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="test">
+		<item>롯데리아</item>
+		<item>맥도널드</item>
+		<item>김밥천국</item>
+		<item>놀부보쌈</item>
+		<item>놀부보쌈</item>
+		<item>놀부보쌈</item>
+		<item>놀부보쌈</item>
+		<item>놀부보쌈</item>
+		<item>놀부보쌈</item>
+		<item>놀부보쌈</item>
+		<item>놀부보쌈</item>
+	</string-array>
+	<string-array name="test2">
+		<item>게시판</item>
+		<item>게시판2</item>
+		<item>게시판3</item>
+		<item>게시판4</item>
+		<item>게시판5</item>
+		<item>롯데리아</item>
+	</string-array>	
+	
+	
+	
+	<string-array name="test_url">
+		<item>http://m.khan.co.kr</item>
+		<item>http://m.donga.com</item>
+		<item>http://etc.mk.co.kr/mobile</item>
+		<item>http://m.mt.co.kr</item>
+	</string-array>
+	
+	
+</resources>
