@@ -3,6 +3,7 @@ package kr.co.Project_UI;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TabHost;
 
 public class Project_UIActivity extends TabActivity {
@@ -35,4 +36,14 @@ public class Project_UIActivity extends TabActivity {
 		tabHost.setCurrentTab(0);
 		
     }
+    
+//    @Override
+//    protected void onResume() {
+//    	super.onResume();
+//    	Log.d("myDebug", "logout...");
+//    	Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//    	intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//    	startActivity(intent);
+//    	finish();
+//    }
 }
