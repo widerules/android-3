@@ -2,6 +2,7 @@ package kr.co.Project_UI;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -16,7 +17,11 @@ public class SecondTab_2 extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.secondtab_2_layout);
+		
+		View pView = LayoutInflater.from(this.getParent()).inflate(
+				R.layout.secondtab_2_layout, null);
+		setContentView(pView);
+		
 		prevBtn = (Button) findViewById(R.id.prevBtn);
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
