@@ -21,16 +21,14 @@
                 android:background="#000000"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
-                android:paddingTop="10dp" 
-                >
+                android:paddingTop="10dp" >
 
                 <Button
                     android:id="@+id/prevBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:text="뒤로 "
-                    android:textSize="10dp" >
-                </Button>
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -40,8 +38,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="글 쓰기"
-                    android:textSize="25dp" >
-                </TextView>
+                    android:textSize="25dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -53,8 +50,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:text=" 맛집명 " >
-                </TextView>
+                    android:text=" 맛집명 " />
 
                 <EditText
                     android:id="@+id/title"
@@ -72,8 +68,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:text=" 카테고리 " >
-                </TextView>
+                    android:text=" 카테고리 " />
 
                 <Spinner
                     android:id="@+id/spinVw"
@@ -90,13 +85,24 @@
                     android:id="@+id/textView4"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:text=" 주소" >
-                </TextView>
+                    android:text=" 주소" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="터치해서 검색하세요" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageButton
+                    android:id="@+id/cameraBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/camera1" />
             </LinearLayout>
 
             <LinearLayout
@@ -113,28 +119,21 @@
                 <EditText
                     android:id="@+id/content"
                     android:layout_width="fill_parent"
-                    android:layout_height="287dp"
+                    android:layout_height="150dp"
                     android:hint="내용을 입력하세요.         최대 500자" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
-				<Button
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_weight="1"
-				    android:text="사진등록"
-				    />
-				<Button
-				    android:id="@+id/saveBtn"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_weight="1"
-				    android:text="저장"
-				    />
-				    
-       		
+				 <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="저장" />
+               
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

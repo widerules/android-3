@@ -1,12 +1,14 @@
 package kr.co.Project_UI;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 public class SecondTab_2 extends Activity implements OnClickListener {
 	BoardHelper boardHelper = new BoardHelper();
 	Button prevBtn;
+	ImageButton camera;
 	Button saveBtn;
 	EditText title;
 	EditText content;
@@ -26,9 +29,13 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		View pView = LayoutInflater.from(this.getParent()).inflate(R.layout.secondtab_2_layout, null);
 		setContentView(pView);
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, name);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, name);
+		
 		spinVw = (Spinner)findViewById(R.id.spinVw);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinVw.setPrompt("음식의 종류를 선택하세요.");
 		spinVw.setAdapter(adapter);
 		spinVw.setSelection(0);
 
@@ -36,6 +43,8 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		prevBtn.setOnClickListener(this);
 		saveBtn = (Button)findViewById(R.id.saveBtn);
 		saveBtn.setOnClickListener(this);
+		camera = (ImageButton)findViewById(R.id.cameraBtn);
+		camera.setOnClickListener(this);
 		
 		title = (EditText)findViewById(R.id.title);
 		content = (EditText)findViewById(R.id.content);
@@ -47,6 +56,10 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 			SecondTab parent = ((SecondTab) getParent());
 			parent.onBackPressed();
 			break;
+		case R.id.cameraBtn:
+			Intent i = new Intent(SecondTab_2.this, Camera.class);
+			startActivity(i);
+			break;
 		case R.id.saveBtn :
 			if(boardHelper.writePost(new BoardVO(0, "장상윤", "777777", 
 					title.getText().toString(), content.getText().toString(), 0, null)))
@@ -57,5 +70,6 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 			finish();
 			break;
 		}
+		
 	}
 }

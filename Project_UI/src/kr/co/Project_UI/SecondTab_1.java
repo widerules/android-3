@@ -1,5 +1,6 @@
 package kr.co.Project_UI;
 
+
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -29,7 +30,7 @@ public class SecondTab_1 extends Activity {
 			public void onClick(View view) {
 				Intent intent = new Intent(SecondTab_1.this, SecondTab_2.class);
         		view = SecondTab.SecondTabHGroup.getLocalActivityManager()
-        						.startActivity("FirstTab_2", intent
+        						.startActivity("SecondTab_2", intent
         						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).getDecorView();
         		
         		SecondTab.SecondTabHGroup.replaceView(view);
