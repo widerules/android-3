@@ -22,6 +22,8 @@
         <activity android:name=".ThirdTab"></activity>
         <activity android:name=".FourthTab"></activity>
         <activity android:name=".FifthTab"></activity>
+        <activity android:name=".Camera"
+            	  android:theme="@android:style/Theme.Dialog"></activity>
 
     </application>
 </manifest>

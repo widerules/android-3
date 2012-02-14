@@ -4,6 +4,10 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-    <TextView android:text="두 번째 탭 화면입니다." android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+  <ImageButton 
+      android:background="@drawable/camera1"
+      android:layout_width="50dp"
+      android:layout_height="45dp"
+      />
     
 </LinearLayout>

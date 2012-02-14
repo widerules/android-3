@@ -7,6 +7,6 @@ public class FifthTab extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.thirdtab_1_layout);
+		setContentView(R.layout.fifthtab_1_layout);
 	}
 }
