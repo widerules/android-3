@@ -88,9 +88,10 @@
                     android:text=" 주소" />
 
                 <EditText
+                    android:id="@+id/address"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:hint="터치해서 검색하세요" />
+                    android:hint="터치" />
             </LinearLayout>
 
             <LinearLayout

@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, TabHostExampleActivity!</string>
     <string name="app_name">선택</string>
+    <string name="str_done">완료</string>
 </resources>
