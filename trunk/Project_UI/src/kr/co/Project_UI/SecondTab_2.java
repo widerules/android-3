@@ -3,6 +3,8 @@ package kr.co.Project_UI;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import kr.co.NaverMap.NaverMapActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,8 +18,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,6 +103,19 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		title = (EditText)findViewById(R.id.title);
 		content = (EditText)findViewById(R.id.content);
 		mPhotoImageView = (ImageView) findViewById(R.id.image);
+		EditText address = (EditText)findViewById(R.id.address);
+		address.setOnClickListener(this);
+		address.setOnTouchListener(new OnTouchListener() {
+			
+			public boolean onTouch(View v, MotionEvent event) {
+				Intent intent = new Intent(SecondTab_2.this, NaverMapActivity.class);
+				v = SecondTab.SecondTabHGroup.getLocalActivityManager()
+								.startActivity("NaverMap", intent
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).getDecorView();
+				setContentView(v);
+				return false;
+			}
+		});
 	}
 	
 	private void doTakePhotoAction() {
@@ -119,7 +136,7 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		Intent intent = new Intent(getApplicationContext(), PhotoSelectionActivity.class);
 		startActivityForResult(intent, PICK_FROM_ALBUM);		
 	}
-
+	
 
 	public void onClick(View v) {
 		switch(v.getId()) {
