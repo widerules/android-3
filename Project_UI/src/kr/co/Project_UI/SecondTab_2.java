@@ -87,9 +87,20 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		// 앨범 호출
 		Intent intent = new Intent(Intent.ACTION_PICK);
 		intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-		startActivityForResult(intent, PICK_FROM_ALBUM);
+		getParent().startActivityForResult(intent, PICK_FROM_ALBUM);
 		Log.d("mycamera","앨범");
+		
 	}
+	
+	
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Toast.makeText(getApplicationContext(), "잡혀라", 3000).show();
+		
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
@@ -115,13 +126,13 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		}
 
 		case PICK_FROM_ALBUM: {
-
+			
 			Log.d("mycamera","결과 직전");
 			mImageCaptureUri = data.getData();
+			mPhotoImageView.setImageURI(mImageCaptureUri);
 		}
 
 		case PICK_FROM_CAMERA: {
-
 			Intent intent = new Intent("com.android.camera.action.CROP");
 			intent.setDataAndType(mImageCaptureUri, "image/*");
 
@@ -131,7 +142,7 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 			intent.putExtra("aspectY", 1);
 			intent.putExtra("scale", true);
 			intent.putExtra("return-data", true);
-			startActivityForResult(intent, CROP_FROM_CAMERA);
+			getParent().startActivityForResult(intent, CROP_FROM_CAMERA);
 
 			break;
 		}
