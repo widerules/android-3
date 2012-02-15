@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -31,9 +32,10 @@ public class SecondTab_1 extends Activity implements OnClickListener{
 		
 		firstListView.setOnItemClickListener(new OnItemClickListener() {
 
-			public void onItemClick(AdapterView<?> arg0, View v, int arg2,
+			public void onItemClick(AdapterView<?> arg0, View v, int position,
 					long arg3) {
 				Intent intent = new Intent(SecondTab_1.this, SecondTab_3.class);
+				intent.putExtra("postNo", bList.get(position).getPostNo());
 				v = SecondTab.SecondTabHGroup.getLocalActivityManager()
 						.startActivity("SecondTab_3", intent
 						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).getDecorView();

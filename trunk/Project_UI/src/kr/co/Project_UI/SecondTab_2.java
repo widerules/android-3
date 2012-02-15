@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -32,6 +33,7 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 	Button saveBtn;
 	EditText title;
 	EditText content;
+	String imgPath;
 	
 	private static final int PICK_FROM_CAMERA = 0;
 	private static final int PICK_FROM_ALBUM = 1;
@@ -53,6 +55,8 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		if(intent != null) {
 			Uri photoUri = PhotoInfo.getPhotoInfo().getUri();
 			if(photoUri != null) {
+				Log.d("myDebug", photoUri.getPath());
+				imgPath = getRealImagePath(photoUri);
 				Bitmap bitmap = null;
 				try {
 					bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoUri), null, null);
@@ -116,55 +120,6 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 		startActivityForResult(intent, PICK_FROM_ALBUM);		
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		
-		if (resultCode != RESULT_OK) {
-			return;
-		}
-
-		switch (requestCode) {
-		case CROP_FROM_CAMERA: {
-			final Bundle extras = data.getExtras();
-
-			if (extras != null) {
-				Bitmap photo = extras.getParcelable("data");
-				
-				mPhotoImageView.setImageBitmap(photo);
-			}
-
-			File f = new File(mImageCaptureUri.getPath());
-			if (f.exists()) {
-				f.delete();
-			}
-
-			break;
-		}
-
-		case PICK_FROM_ALBUM: {
-			
-			Log.d("mycamera","결과 직전");
-			mImageCaptureUri = data.getData();
-			mPhotoImageView.setImageURI(mImageCaptureUri);
-		}
-
-		case PICK_FROM_CAMERA: {
-			Intent intent = new Intent("com.android.camera.action.CROP");
-			intent.setDataAndType(mImageCaptureUri, "image/*");
-
-			intent.putExtra("outputX", 245);
-			intent.putExtra("outputY", 100);
-			intent.putExtra("aspectX", 1);
-			intent.putExtra("aspectY", 1);
-			intent.putExtra("scale", true);
-			intent.putExtra("return-data", true);
-			getParent().startActivityForResult(intent, CROP_FROM_CAMERA);
-
-			break;
-		}
-		}
-	}
-	
 
 	public void onClick(View v) {
 		switch(v.getId()) {
@@ -198,13 +153,31 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 			break;
 		case R.id.saveBtn :
 			if(boardHelper.writePost(new BoardVO(0, "장상윤", "777777", 
-					title.getText().toString(), content.getText().toString(), 0, null)))
+					title.getText().toString(), content.getText().toString(), 0, null, imgPath)))
 				Toast.makeText(getApplicationContext(), "등록 성공", 2000).show();
 			else {
 				Toast.makeText(getApplicationContext(), "등록 실패", 2000).show();
 			}
-			finish();
 			break;
 		}
+	}
+	
+	/**
+	 * URI로 부터 실제 파일 경로를 가져온다.
+	 * @param uriPath URI : URI 경로
+	 * @return String : 실제 파일 경로
+	 */
+	public String getRealImagePath(Uri uriPath)
+	{
+		String []proj = {MediaStore.Images.Media.DATA};
+		Cursor cursor = managedQuery (uriPath, proj, null, null, null);
+		int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+		cursor.moveToFirst();
+
+		String path = cursor.getString(index);
+		path = path.substring(5);
+
+		return path;
 	}
 }

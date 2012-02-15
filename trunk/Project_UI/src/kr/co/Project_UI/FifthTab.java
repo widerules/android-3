@@ -32,9 +32,9 @@ public class FifthTab extends Activity implements OnClickListener {
 		logoutBtn = (Button)findViewById(R.id.logoutBtn);
 		logoutBtn.setOnClickListener(this);
 		
-		Log.d("myDebug", FacebookInfo.FACEBOOK_PROFILE_IMG);
-		ImageDownloader imageDownloader = new ImageDownloader();
-		imageDownloader.download(FacebookInfo.FACEBOOK_PROFILE_IMG, profile);
+//		Log.d("myDebug", FacebookInfo.FACEBOOK_PROFILE_IMG);
+//		ImageDownloader imageDownloader = new ImageDownloader();
+//		imageDownloader.download(FacebookInfo.FACEBOOK_PROFILE_IMG, profile);
 		
 	}
 

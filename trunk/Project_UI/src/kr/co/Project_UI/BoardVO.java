@@ -8,9 +8,21 @@ public class BoardVO {
 	String content;
 	int likeCnt;
 	String regDate;
+	String imgUrl;
 	
 	public BoardVO(int postNo, String writer, String writerId, String title,
-			String content, int likeCnt, String regDate) {
+			int likeCnt, String regDate) {
+		super();
+		this.postNo = postNo;
+		this.writer = writer;
+		this.writerId = writerId;
+		this.title = title;
+		this.likeCnt = likeCnt;
+		this.regDate = regDate;
+	}
+
+	public BoardVO(int postNo, String writer, String writerId, String title,
+			String content, int likeCnt, String regDate, String imgUrl) {
 		super();
 		this.postNo = postNo;
 		this.writer = writer;
@@ -19,6 +31,7 @@ public class BoardVO {
 		this.content = content;
 		this.likeCnt = likeCnt;
 		this.regDate = regDate;
+		this.imgUrl = imgUrl;
 	}
 	
 	public int getPostNo() {
@@ -63,6 +76,19 @@ public class BoardVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 	
+	@Override
+	public String toString() {
+		return "BoardVO [postNo=" + postNo + ", writer=" + writer
+				+ ", writerId=" + writerId + ", title=" + title + ", content="
+				+ content + ", likeCnt=" + likeCnt + ", regDate=" + regDate
+				+ ", imgUrl=" + imgUrl + "]";
+	}
 
 }

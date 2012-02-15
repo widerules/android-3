@@ -1,7 +1,5 @@
 package kr.co.Project_UI;
 
-import java.net.URL;
-
 import com.facebook.android.Facebook;
 
 public class FacebookInfo {
