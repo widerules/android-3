@@ -1,12 +1,14 @@
 package kr.co.Project_UI;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -42,11 +44,37 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 	Spinner spinVw;
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		Intent intent = getIntent();
+		
+		if(intent != null) {
+			Uri photoUri = PhotoInfo.getPhotoInfo().getUri();
+			if(photoUri != null) {
+				Bitmap bitmap = null;
+				try {
+					bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoUri), null, null);
+					Log.d("photo", photoUri + "");
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+		
+				mPhotoImageView.setImageBitmap(bitmap);
+				mPhotoImageView.invalidate();
+				PhotoInfo.getPhotoInfo().setUri(null);
+				
+			}
+		}
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		View pView = LayoutInflater.from(this.getParent()).inflate(R.layout.secondtab_2_layout, null);
 		setContentView(pView);
-		
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, name);
@@ -84,21 +112,8 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 	}
 
 	private void doTakeAlbumAction() {
-		// ¾Ù¹ü È£Ãâ
-		Intent intent = new Intent(Intent.ACTION_PICK);
-		intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-		getParent().startActivityForResult(intent, PICK_FROM_ALBUM);
-		Log.d("mycamera","¾Ù¹ü");
-		
-	}
-	
-	
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Toast.makeText(getApplicationContext(), "ÀâÇô¶ó", 3000).show();
-		
+		Intent intent = new Intent(getApplicationContext(), PhotoSelectionActivity.class);
+		startActivityForResult(intent, PICK_FROM_ALBUM);		
 	}
 
 	@Override
@@ -114,6 +129,7 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 
 			if (extras != null) {
 				Bitmap photo = extras.getParcelable("data");
+				
 				mPhotoImageView.setImageBitmap(photo);
 			}
 
@@ -190,6 +206,5 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 			finish();
 			break;
 		}
-		
 	}
 }
