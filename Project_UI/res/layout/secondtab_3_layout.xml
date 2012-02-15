@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text=" 맛집명 " />
 
-            <EditText
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
@@ -65,7 +65,7 @@
                 android:text=" 지도 " />
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/mapImage"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -99,7 +99,7 @@
                 android:text=" 내용 " />
 
             <TextView
-                android:id="@+id/contentTxt"
+                android:id="@+id/content"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

@@ -36,13 +36,4 @@ public class Project_UIActivity extends TabActivity {
 		
     }
     
-//    @Override
-//    protected void onResume() {
-//    	super.onResume();
-//    	Log.d("myDebug", "logout...");
-//    	Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//    	intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//    	startActivity(intent);
-//    	finish();
-//    }
 }
