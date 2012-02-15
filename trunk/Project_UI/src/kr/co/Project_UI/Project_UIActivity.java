@@ -3,13 +3,12 @@ package kr.co.Project_UI;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TabHost;
 
 public class Project_UIActivity extends TabActivity {
     /** Called when the activity is first created. */
 	public TabHost tabHost = null;
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
