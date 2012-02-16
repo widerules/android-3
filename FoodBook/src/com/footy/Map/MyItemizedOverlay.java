@@ -54,6 +54,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		MapInfo mapInfo = MapInfo.getMapInfo();
 		mapInfo.setAddress(m_overlays.get(index).getTitle());
 		mapInfo.setPoint(m_overlays.get(index).getPoint());
+		
 		return true;
 	}
 	
