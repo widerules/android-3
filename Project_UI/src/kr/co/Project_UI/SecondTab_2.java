@@ -169,7 +169,7 @@ public class SecondTab_2 extends Activity implements OnClickListener {
 					.setNegativeButton("취소", cancelListener).show();
 			break;
 		case R.id.saveBtn :
-			if(boardHelper.writePost(new BoardVO(0, "장상윤", "777777", 
+			if(boardHelper.writePost(new BoardVO(0, FacebookInfo.FACEBOOK_NAME, FacebookInfo.FACEBOOK_ID, 
 					title.getText().toString(), content.getText().toString(), 0, null, imgPath)))
 				Toast.makeText(getApplicationContext(), "등록 성공", 2000).show();
 			else {
