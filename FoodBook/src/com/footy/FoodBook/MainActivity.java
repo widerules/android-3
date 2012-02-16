@@ -1,6 +1,5 @@
 package com.footy.FoodBook;
 
-import kr.co.Project_UI.R;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.Color;
