@@ -46,14 +46,16 @@ public class BoardHelper {
 				String writer = jobj.getString("writer");
 				String writerId = jobj.getString("writer_id");
 				String title = jobj.getString("title");
+				double latitude = Double.parseDouble(jobj.getString("title"));
+				double longitude = Double.parseDouble(jobj.getString("title"));
 				String category = jobj.getString("category");
 				int likeCnt = jobj.getInt("like_cnt");
 				String regDate = jobj.getString("reg_date");
 				
 				if( FacebookHelper.isFriend(writerId) )
-					list.add(new BoardVO(postNo, writer, writerId, title, category, likeCnt, regDate));
+					list.add(new BoardVO(postNo, writer, writerId, title, latitude, longitude, category, likeCnt, regDate));
 				else if( !Constants.FILTER_BOARD ) 
-					list.add(new BoardVO(postNo, writer, writerId, title, category, likeCnt, regDate));
+					list.add(new BoardVO(postNo, writer, writerId, title, latitude, longitude, category, likeCnt, regDate));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

@@ -14,12 +14,14 @@ public class BoardVO {
 	String regDate;
 
 	public BoardVO(int postNo, String writer, String writerId, String title,
-			String category, int likeCnt, String regDate) {
+			double latitude, double longitude, String category, int likeCnt, String regDate) {
 		super();
 		this.postNo = postNo;
 		this.writer = writer;
 		this.writerId = writerId;
 		this.title = title;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.category = category;
 		this.likeCnt = likeCnt;
 		this.regDate = regDate;
