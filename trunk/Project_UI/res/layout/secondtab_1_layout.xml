@@ -28,11 +28,18 @@
         </Button>
     </LinearLayout>
     <ListView
-        android:id="@+id/list_view1"
+        android:id="@android:id/list"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
          >
     </ListView>
+    
+    <TextView
+        android:layout_width="wrap_content" 
+		android:id="@android:id/empty" 
+		android:layout_height="wrap_content" 
+		android:layout_gravity="center_horizontal"
+		android:text="표시할 내용이 없습니다." />
    
 
 </LinearLayout>

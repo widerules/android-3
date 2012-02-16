@@ -3,6 +3,7 @@ package kr.co.Project_UI;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class BoardAdapter extends ArrayAdapter<BoardVO> {
 		vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
+
 	//하나의 항목이 들어갈때 마다 호출됨
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
@@ -37,6 +39,11 @@ public class BoardAdapter extends ArrayAdapter<BoardVO> {
 		}
 		
 		BoardVO boardVO = items.get(position);
+		
+		if( !FacebookHelper.isFriend(boardVO.getWriterId())) {
+			Log.d("myDebug", "return null (adapter)");
+			return null;
+		}
 		
 		ImageView img 	 = (ImageView)v.findViewById(R.id.img);
 		TextView title = (TextView)v.findViewById(R.id.title);

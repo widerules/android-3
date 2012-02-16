@@ -24,7 +24,6 @@ import android.util.Log;
 
 public class BoardHelper {
 	
-	
 	public BoardHelper() {
 		// nothing to do yet
 	}
@@ -34,7 +33,7 @@ public class BoardHelper {
 	 */
 	public ArrayList<BoardVO> getList() {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
-		String urlStr = "http://115.145.172.123:8000/android-3/getList.jsp";
+		String urlStr = Constants.WEB_SERVER_URL + "getList.jsp";
 		String jsonStr = call(urlStr);
 		try {
 			JSONObject jobj = new JSONObject(jsonStr);
@@ -47,7 +46,9 @@ public class BoardHelper {
 				String title = jobj.getString("title");
 				int likeCnt = jobj.getInt("like_cnt");
 				String regDate = jobj.getString("reg_date");
-				list.add(new BoardVO(postNo, writer, writerId, title, likeCnt, regDate));
+				
+				if( FacebookHelper.isFriend(writerId) )
+					list.add(new BoardVO(postNo, writer, writerId, title, likeCnt, regDate));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -85,19 +86,21 @@ public class BoardHelper {
 	 * @return : true if write done else false
 	 */
 	public boolean writePost(BoardVO boardVO) {
-		String uploadUrl = "http://115.145.172.123:8000/android-3/imageUpload.jsp";
-		String urlStr = "http://115.145.172.123:8000/android-3/writePost.jsp";
-		String defaultImg = "http://115.145.172.123:8000/android-3/noimage.gif";
-		String path = "http://115.145.172.123:8000/android-3/uploadImages/";
+		String uploadUrl = Constants.WEB_SERVER_URL + "imageUpload.jsp";
+		String urlStr = Constants.WEB_SERVER_URL + "writePost.jsp";
+		String defaultImg = Constants.WEB_SERVER_URL + "noimage.gif";
+		String path = Constants.WEB_SERVER_URL + "uploadImages/";
 		if( !boardVO.getImgUrl().equals("")) {
 			String url = ImageUploader.upload(uploadUrl, boardVO.getImgUrl());
 			try {
-				url = URLEncoder.encode(boardVO.getImgUrl(), "utf-8");
+				url = URLEncoder.encode(url, "utf-8");
 				url = url.replaceAll("\\+", "%20");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 			boardVO.setImgUrl(path + url);
+			Log.d("myDebug", "최종 저장 url" + boardVO.getImgUrl());
+			
 		}
 		else
 			boardVO.setImgUrl(defaultImg);
@@ -143,7 +146,7 @@ public class BoardHelper {
     }
 	
 	public BoardVO getContent(int postNo) {
-		String urlStr = "http://115.145.172.123:8000/android-3/getBoardContent.jsp?postNo=" + postNo;
+		String urlStr = Constants.WEB_SERVER_URL + "getBoardContent.jsp?postNo=" + postNo;
 		String jsonStr = call(urlStr);
 		try {
 			JSONObject jobj = new JSONObject(jsonStr);

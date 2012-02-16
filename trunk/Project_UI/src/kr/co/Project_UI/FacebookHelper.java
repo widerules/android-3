@@ -12,30 +12,31 @@ import com.facebook.android.Facebook;
 
 public class FacebookHelper extends Application {
 	
-	private static Facebook facebook = null;
-	private static ArrayList<String> friendList;
+	private static Facebook facebook = FacebookInfo.getInstance();
+	private static ArrayList<String> friendsList;
 	
 	public FacebookHelper() {
-		facebook = FacebookInfo.getInstance();
+		
 	}
 	
 	/**
 	 * Get current user's Facebook friends list.
 	 * It must be called once for filtering.
 	 */
-	public void getFriendsList() {
-		friendList = new ArrayList<String>();
+	public static void getFriendsList() {
+		friendsList = new ArrayList<String>();
 		try {
 			String resultStr = facebook.request("me/friends");
 			JSONObject jobj = new JSONObject(resultStr);
 			JSONArray jarr = jobj.getJSONArray("data");
 			int friendsCnt = jarr.length();
-			friendList.clear();
+			friendsList.clear();
+			friendsList.add(FacebookInfo.FACEBOOK_ID);
 			for(int i=0; i<friendsCnt; i++) {
 				String id = null;
 				jobj = (JSONObject)jarr.get(i);
 				id = jobj.getString("id");
-				friendList.add(id);
+				friendsList.add(id);
 			}
 			Log.d("myDebug", friendsCnt + " friends' id loaded.");
 		} catch (Exception e) {
@@ -47,8 +48,8 @@ public class FacebookHelper extends Application {
 	 * @param id : writer's id
 	 * @return : true if id is user's friends, else false
 	 */
-	public boolean isFriend(String id) {
-		for(String fid : friendList) {
+	public static boolean isFriend(String id) {
+		for(String fid : friendsList) {
 			if(fid.equals(id))
 				return true;
 		}

@@ -39,6 +39,7 @@ public class LoginActivity extends Activity {
         FacebookInfo.FACEBOOK_ACCESS_TOKEN = pref.getString("token", "");
         
     	try {
+    		
 			facebook = new Facebook(FacebookInfo.FACEBOOK_APP_ID);
 			FacebookInfo.facebook = facebook;
 			if(FacebookInfo.FACEBOOK_ACCESS_TOKEN != null && !FacebookInfo.FACEBOOK_ACCESS_TOKEN.equals("")) {
@@ -65,6 +66,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	private void startMain() {
+		FacebookHelper.getFriendsList();
 		Intent intent = new Intent(getApplicationContext(), Project_UIActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		startActivity(intent);
