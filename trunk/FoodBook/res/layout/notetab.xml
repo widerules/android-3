@@ -137,6 +137,7 @@
                         android:id="@+id/address"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:editable="false"
                         android:hint="터치" />
                 </LinearLayout>
 
@@ -170,7 +171,7 @@
                         android:text=" 내용" />
 
                     <EditText
-                        android:id="@+id/content"
+                        android:id="@+id/contentEdit"
                         android:layout_width="fill_parent"
                         android:layout_height="150dp"
                         android:hint="내용을 입력하세요.         최대 500자" />
@@ -200,11 +201,6 @@
         android:background="#ffffff"
         android:visibility="gone"
         android:orientation="vertical" >
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -212,113 +208,118 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#00000000"
-                 >
+                android:background="#00000000" >
                 <ImageView
-		                android:id="@+id/showTitle"
-		                android:layout_width="fill_parent"
-		                android:layout_height="47dp"
-		                android:src="@drawable/viewtabtitle"
-		                />
-		            <ImageButton 
-		                android:id="@+id/prevBtn2"
-			            android:layout_width="55dp"
-			            android:layout_height="35dp"
-			            android:scaleType="fitXY"
-			            android:src="@drawable/prevbtn"
-			            android:background="#00ffffff"
-			            android:layout_margin="5dp"
-			            android:layout_alignParentLeft="true"
-		                />
-            </RelativeLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:text=" 맛집명 " />
-                <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/showTitle"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:text=" 지도 " />
-                <ImageView
-                    android:id="@+id/mapImage"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="15dp" >
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:text=" 맛집사진 " />
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="15dp" >
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:text=" 내용 " />
-                <TextView
-                    android:id="@+id/content"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="15dp" >
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:text="  댓글 " />
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="15dp" >
+                    android:layout_height="47dp"
+                    android:src="@drawable/viewtabtitle" />
                 <ImageButton
-                    android:id="@+id/likeBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/prevBtn2"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="5dp"
                     android:background="#00ffffff"
-                    android:layout_weight="1"
-                    android:src="@drawable/likebtn" />
-            </LinearLayout>
+                    android:scaleType="fitXY"
+                    android:src="@drawable/prevbtn" />
+            </RelativeLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                	android:layout_height="wrap_content"
+                	android:orientation="vertical" >
+	                <LinearLayout
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:orientation="horizontal" >
+	                    <TextView
+	                        android:id="@+id/textView2"
+	                        android:layout_width="75dp"
+	                        android:layout_height="wrap_content"
+	                        android:text=" 맛집명 " />
+	                    <TextView
+	                        android:id="@+id/title"
+	                        android:layout_width="fill_parent"
+	                        android:layout_height="wrap_content" />
+	                </LinearLayout>
+	                <LinearLayout
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:orientation="horizontal" >
+	                    <TextView
+	                        android:id="@+id/textView3"
+	                        android:layout_width="75dp"
+	                        android:layout_height="wrap_content"
+	                        android:text=" 지도 " />
+	                    <ImageView
+	                        android:id="@+id/mapImage"
+	                        android:layout_width="fill_parent"
+	                        android:layout_height="wrap_content" />
+	                </LinearLayout>
+	                <LinearLayout
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:orientation="horizontal"
+	                    android:paddingTop="15dp" >
+	                    <TextView
+	                        android:id="@+id/textView4"
+	                        android:layout_width="75dp"
+	                        android:layout_height="wrap_content"
+	                        android:text=" 맛집사진 " />
+	                    <ImageView
+	                        android:id="@+id/image"
+	                        android:layout_width="fill_parent"
+	                        android:layout_height="wrap_content" />
+	                </LinearLayout>
+	                <LinearLayout
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:orientation="horizontal"
+	                    android:paddingTop="15dp" >
+	                    <TextView
+	                        android:id="@+id/textView4"
+	                        android:layout_width="75dp"
+	                        android:layout_height="wrap_content"
+	                        android:text=" 내용 " />
+	                    <TextView
+	                        android:id="@+id/content"
+	                        android:layout_width="fill_parent"
+	                        android:layout_height="wrap_content" />
+	                </LinearLayout>
+	
+	                <LinearLayout
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:orientation="horizontal"
+	                    android:paddingTop="15dp" >
+	                    <TextView
+	                        android:id="@+id/textView5"
+	                        android:layout_width="75dp"
+	                        android:layout_height="wrap_content"
+	                        android:text="  댓글 " />
+	                    <EditText
+	                        android:layout_width="fill_parent"
+	                        android:layout_height="wrap_content" />
+	                </LinearLayout>
+	                <LinearLayout
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:orientation="horizontal"
+	                    android:paddingTop="15dp" >
+	                    <ImageButton
+	                        android:id="@+id/likeBtn"
+	                        android:layout_width="wrap_content"
+	                        android:layout_height="wrap_content"
+	                        android:layout_weight="1"
+	                        android:background="#00ffffff"
+	                        android:src="@drawable/likebtn" />
+	                </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
-        </ScrollView>
     </LinearLayout>
-    
-    
+
 </LinearLayout>
