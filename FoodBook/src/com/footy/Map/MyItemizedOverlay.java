@@ -17,8 +17,10 @@ package com.footy.Map;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.widget.Toast;
 
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
@@ -54,7 +56,6 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		MapInfo mapInfo = MapInfo.getMapInfo();
 		mapInfo.setAddress(m_overlays.get(index).getTitle());
 		mapInfo.setPoint(m_overlays.get(index).getPoint());
-		
 		return true;
 	}
 	

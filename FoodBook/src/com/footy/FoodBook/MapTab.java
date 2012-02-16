@@ -21,6 +21,7 @@ import java.util.List;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -74,7 +75,6 @@ public class MapTab extends MapActivity {
 		//////////////
 		drawable = getResources().getDrawable(R.drawable.marker);
 		itemizedOverlay = new MyItemizedOverlay(drawable, mapView);
-		
 		findPlaceTxt = (EditText)findViewById(R.id.findPlaceTxt);
 		String searchPlace = findPlaceTxt.getText().toString();
 		
