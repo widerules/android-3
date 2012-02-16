@@ -16,9 +16,12 @@
 package com.footy.Map;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,7 +46,7 @@ import com.google.android.maps.OverlayItem;
  * @author Jeff Gilfelt
  *
  */
-public class BalloonOverlayView extends FrameLayout {
+public class BalloonOverlayView extends FrameLayout implements OnTouchListener {
 
 	private LinearLayout layout;
 	private TextView title;
@@ -69,6 +72,9 @@ public class BalloonOverlayView extends FrameLayout {
 		View v = inflater.inflate(R.layout.balloon_overlay, layout);
 		title = (TextView) v.findViewById(R.id.balloon_item_title);
 		snippet = (TextView) v.findViewById(R.id.balloon_item_snippet);
+		LinearLayout lin = (LinearLayout)v.findViewById(R.id.balloon_main_layout);
+		
+		
 
 		ImageView close = (ImageView) v.findViewById(R.id.close_img_button);
 		close.setOnClickListener(new OnClickListener() {
@@ -107,6 +113,21 @@ public class BalloonOverlayView extends FrameLayout {
 			snippet.setVisibility(GONE);
 		}
 		
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		if(v.getId() == R.id.balloon_main_layout) {
+			switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				Log.d("test", "ÂïÇû´ç");
+				break;
+
+			default:
+				break;
+			}
+		}
+		return false;
 	}
 
 }
