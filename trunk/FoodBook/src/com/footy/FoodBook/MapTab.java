@@ -24,6 +24,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.footy.Board.BoardHelper;
+import com.footy.Board.BoardVO;
 import com.footy.Map.MyItemizedOverlay;
 import com.footy.Store.SearchHelper;
 import com.footy.Store.StoreVO;
@@ -31,10 +33,13 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 public class MapTab extends MapActivity {
+	
+	BoardHelper boardHelper = new BoardHelper();
 
 	MapView mapView;
 	EditText findPlaceTxt;
@@ -54,10 +59,13 @@ public class MapTab extends MapActivity {
         mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
 		
+		
 		final MapController mc = mapView.getController();
-		//mc.animateTo();
+		GeoPoint point = new GeoPoint(37298025, 126972817);  
+		mc.animateTo(point);
 		mc.setZoom(16);
 		
+		putBoardMarker();
 	}
 //	
 	
@@ -94,6 +102,32 @@ public class MapTab extends MapActivity {
 		Log.d("test", storeVO.toString());
 		overlayItem = new OverlayItem(point, storeVO.getName(), storeVO.getAddr());
 		itemizedOverlay.addOverlay(overlayItem);
+		
+	}
+	
+	public void putBoardMarker(){
+		mapOverlays = mapView.getOverlays();
+		drawable = getResources().getDrawable(R.drawable.marker2);
+		itemizedOverlay2 = new MyItemizedOverlay(drawable, mapView);
+		
+		ArrayList<BoardVO> bList = boardHelper.getList();
+		Log.d("test11", bList.size()+"");
+		
+		try {
+			for(BoardVO boardVO : bList) {
+				double intLatitude = boardVO.getLatitude() * 1000000; 
+		 		double intLongitude = boardVO.getLongitude() * 1000000;
+		 		
+		 		point = new GeoPoint((int)intLatitude,(int)intLongitude);
+				Log.d("test11", boardVO.toString());
+				overlayItem = new OverlayItem(point, boardVO.getTitle(), boardVO.getContent());
+				itemizedOverlay2.addOverlay(overlayItem);
+				
+			}
+			mapOverlays.add(itemizedOverlay2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
