@@ -161,8 +161,10 @@ public class BoardHelper {
 			String writerId = jobj.getString("writer_id");
 			String title = jobj.getString("title");
 			String category = jobj.getString("category");
-			double latitude = Double.parseDouble(jobj.getString("latitude"));
-			double longitude = Double.parseDouble(jobj.getString("longitude"));
+//			double latitude = Double.parseDouble(jobj.getString("latitude"));
+//			double longitude = Double.parseDouble(jobj.getString("longitude"));
+			double latitude = 30.43;
+			double longitude = 130.43;
 			String content = jobj.getString("content");
 			String imgUrl = jobj.getString("img_url");
 			int likeCnt = jobj.getInt("like_cnt");

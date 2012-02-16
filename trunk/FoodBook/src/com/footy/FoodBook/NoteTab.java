@@ -25,19 +25,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.footy.Board.BoardAdapter;
 import com.footy.Board.BoardHelper;
 import com.footy.Board.BoardVO;
 import com.footy.Facebook.FacebookInfo;
+import com.footy.Util.ImageDownloader;
 
 public class NoteTab extends ListActivity implements OnClickListener, OnItemClickListener {
 	
 	BoardHelper boardHelper = new BoardHelper();
+	ImageDownloader imageDownloader = new ImageDownloader();
+	
 	LinearLayout notetab1, notetab2, notetab3, notetab4;
 	ImageButton writeBtn, prevBtn, cameraBtn;
-	EditText title, content, address;
+	EditText titleEdit, contentEdit, address;
 	
 	private static final int PICK_FROM_CAMERA = 0;
 	private static final int PICK_FROM_ALBUM = 1;
@@ -53,6 +57,9 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 	ListView listView;
 	BoardAdapter boardAdapter;
 	ArrayList<BoardVO> bList;
+	
+	TextView titleText, contentText;
+	ImageView image;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,8 +70,8 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 		notetab3 = (LinearLayout)findViewById(R.id.notetab3);
 //		notetab4 = (LinearLayout)findViewById(R.id.notetab4);
 		
-		title = (EditText)findViewById(R.id.title);
-		content = (EditText)findViewById(R.id.content);
+		titleEdit = (EditText)findViewById(R.id.titleEdit);
+		contentEdit = (EditText)findViewById(R.id.content);
 		
 		writeBtn = (ImageButton)findViewById(R.id.writeBtn);
 		writeBtn.setOnClickListener(this);
@@ -90,6 +97,10 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 		listView.setOnItemClickListener(this);
 		boardAdapter = new BoardAdapter(getApplicationContext(), R.layout.boardui, bList);
 		listView.setAdapter(boardAdapter);
+		
+		titleText = (TextView)findViewById(R.id.title);
+		contentText = (TextView)findViewById(R.id.content);
+		image = (ImageView)findViewById(R.id.image);
 		
 	}
 	@Override
@@ -211,8 +222,8 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 					.setNegativeButton("취소", cancelListener).show();
 			break;
 		case R.id.saveBtn:
-			if(boardHelper.writePost(new BoardVO(0, FacebookInfo.FACEBOOK_NAME, FacebookInfo.FACEBOOK_ID, title.getText().toString().trim(),
-					name[spinVw.getSelectedItemPosition()], 0, 0, content.getText().toString().trim(), getRealImagePath(mImageCaptureUri), 0, null))) {
+			if(boardHelper.writePost(new BoardVO(0, FacebookInfo.FACEBOOK_NAME, FacebookInfo.FACEBOOK_ID, titleEdit.getText().toString().trim(),
+					name[spinVw.getSelectedItemPosition()], 0, 0, contentEdit.getText().toString().trim(), getRealImagePath(mImageCaptureUri), 0, null))) {
 				Toast.makeText(getApplicationContext(), "등록 성공", 2000).show();
 				clearLayout2();
 			}
@@ -225,17 +236,20 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		boardHelper.getContent(bList.get(position).getPostNo());
-//		notetab1.setVisibility(View.GONE);
-//		notetab3.setVisibility(View.VISIBLE);
+		BoardVO boardVO = boardHelper.getContent(bList.get(position).getPostNo());
+		notetab1.setVisibility(View.GONE);
+		notetab3.setVisibility(View.VISIBLE);
 		
+		titleText.setText(boardVO.getTitle());
+		contentText.setText(boardVO.getContent());
+		imageDownloader.download(boardVO.getImgUrl(), image);
 	}
 	
 	private void clearLayout2() {
-		title.setText("");
+		titleEdit.setText("");
 		spinVw.setSelection(0);
 //		address.setText("");
-		content.setText("");
+		contentEdit.setText("");
 		mPhotoImageView.setImageBitmap(null);
 		mImageCaptureUri = null;
 	}
