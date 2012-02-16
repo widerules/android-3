@@ -66,7 +66,7 @@
                 <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="#000000"
+                    android:background="#00000000"
                      >
 
                     <ImageView
@@ -99,7 +99,7 @@
                         android:text=" 맛집명 " />
 
                     <EditText
-                        android:id="@+id/title"
+                        android:id="@+id/titleEdit"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:hint="맛집 명을 입력하세요" />
@@ -200,34 +200,37 @@
         android:background="#ffffff"
         android:visibility="gone"
         android:orientation="vertical" >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#000000"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp" >
-                <Button
-                    android:id="@+id/prevBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:text="뒤로 "
-                    android:textSize="10dp" />
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="글조회"
-                    android:textSize="25dp" />
-            </LinearLayout>
+                android:background="#00000000"
+                 >
+                <ImageView
+		                android:id="@+id/showTitle"
+		                android:layout_width="fill_parent"
+		                android:layout_height="47dp"
+		                android:src="@drawable/viewtabtitle"
+		                />
+		            <ImageButton 
+		                android:id="@+id/prevBtn2"
+			            android:layout_width="55dp"
+			            android:layout_height="35dp"
+			            android:scaleType="fitXY"
+			            android:src="@drawable/prevbtn"
+			            android:background="#00ffffff"
+			            android:layout_margin="5dp"
+			            android:layout_alignParentLeft="true"
+		                />
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -297,11 +300,25 @@
                     android:layout_height="wrap_content"
                     android:text="  댓글 " />
                 <EditText
-                    android:id="@+id/addTxt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+             <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="15dp" >
+                <ImageButton
+                    android:id="@+id/likeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00ffffff"
+                    android:layout_weight="1"
+                    android:src="@drawable/likebtn" />
+            </LinearLayout>
         </LinearLayout>
+        </ScrollView>
     </LinearLayout>
+    
     
 </LinearLayout>
