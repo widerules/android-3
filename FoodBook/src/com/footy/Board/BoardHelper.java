@@ -46,8 +46,11 @@ public class BoardHelper {
 				String writer = jobj.getString("writer");
 				String writerId = jobj.getString("writer_id");
 				String title = jobj.getString("title");
-				double latitude = Double.parseDouble(jobj.getString("title"));
-				double longitude = Double.parseDouble(jobj.getString("title"));
+//				double latitude = Double.parseDouble(jobj.getString("title"));
+//				double longitude = Double.parseDouble(jobj.getString("title"));
+				double latitude = 0.0;
+				double longitude = 0.0;
+				
 				String category = jobj.getString("category");
 				int likeCnt = jobj.getInt("like_cnt");
 				String regDate = jobj.getString("reg_date");
