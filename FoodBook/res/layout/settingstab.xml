@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="5dp" >
+	    <ImageView
+	        android:id="@+id/profile"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/ic_launcher" />
+	    <Button
+	        android:id="@+id/logoutBtn"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="로그아웃" />
+	</LinearLayout>
+	
+	<View
+	    android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:background="#FF909090" />
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:paddingRight="20dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="9"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="맛집 노트 필터링"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/filterBoardText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="친구의 맛집 노트만 표시"
+                android:textColor="#799EE5"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/boardCBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1"
+            android:checked="true" />
+    </LinearLayout>
+	<View
+	    android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:background="#FF909090" />
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:paddingRight="20dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="9"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="푸드 파티 필터링"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/filterPartyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="친구가 등록한 푸드 파티만 표시"
+                android:textColor="#799EE5"
+                android:textSize="15dp" />
+        </LinearLayout>
+        <CheckBox
+            android:id="@+id/partyCBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1"
+            android:checked="true" />
+    </LinearLayout>
+    
+	<View
+	    android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:background="#FF909090" />
+
+</LinearLayout>
