@@ -9,7 +9,8 @@
         android:id="@+id/maptab1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,13 +32,33 @@
                 android:onClick="process"
                 android:text="검색" />
         </LinearLayout>
-    </LinearLayout>
 
-    <com.google.android.maps.MapView
-        android:id="@+id/mapview"
+        <com.google.android.maps.MapView
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:apiKey="0GfogcjRrY0VNlZtCXOds4XZxvVN-Jg76nS4OWw"
+            android:clickable="true" />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/maptab3"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:apiKey="0GfogcjRrY0VNlZtCXOds4XZxvVN-Jg76nS4OWw"
-        android:clickable="true" />
+        android:orientation="vertical" >
+        <TextView 
+            android:id="@+id/partyname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="장소명"/>
+        <TextView 
+            android:id="@+id/partyname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="주소"/>
+        <ListView ></ListView>
+        
+        
+    </LinearLayout>
 
 </LinearLayout>
