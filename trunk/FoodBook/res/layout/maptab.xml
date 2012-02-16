@@ -37,28 +37,8 @@
             android:id="@+id/mapview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:apiKey="0GfogcjRrY0VNlZtCXOds4XZxvVN-Jg76nS4OWw"
+            android:apiKey="0VFCSNUgGDCfK_w4kVp7qgR59hJxJEELun8KRhg"
             android:clickable="true" />
     </LinearLayout>
     
-    <LinearLayout 
-        android:id="@+id/maptab3"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
-        <TextView 
-            android:id="@+id/partyname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="장소명"/>
-        <TextView 
-            android:id="@+id/partyname"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="주소"/>
-        <ListView ></ListView>
-        
-        
-    </LinearLayout>
-
 </LinearLayout>

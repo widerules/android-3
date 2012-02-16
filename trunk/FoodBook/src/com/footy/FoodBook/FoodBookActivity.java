@@ -16,7 +16,7 @@ public class FoodBookActivity extends Activity {
 			public void run() {
 				// TODO Auto-generated method stub
 				try{
-					Thread.sleep(3000);				
+					Thread.sleep(1000);				
 				}catch(Throwable ex){
 					ex.printStackTrace();
 				}
