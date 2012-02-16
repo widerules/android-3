@@ -2,7 +2,9 @@ package com.footy.Board;
 
 import java.util.ArrayList;
 
+import com.footy.Facebook.FacebookInfo;
 import com.footy.FoodBook.R;
+import com.footy.Util.ImageDownloader;
 
 import android.content.Context;
 import android.util.Log;
@@ -14,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BoardAdapter extends ArrayAdapter<BoardVO> {
-
+	ImageDownloader imageDownloader = new ImageDownloader();
 	ArrayList<BoardVO> items;
 	int textViewResourceId;
 	LayoutInflater vi;
@@ -45,7 +47,7 @@ public class BoardAdapter extends ArrayAdapter<BoardVO> {
 		TextView title = (TextView)v.findViewById(R.id.title);
 		TextView writer  = (TextView)v.findViewById(R.id.writer);
 		TextView likeCnt  = (TextView)v.findViewById(R.id.likeCnt);
-		img.setImageResource( R.drawable.icon );
+		imageDownloader.download("http://graph.facebook.com/" + boardVO.getWriterId() + "/picture?type=normal", img);
 		title.setText(boardVO.getTitle());
 		writer.setText(boardVO.getWriter());
 		likeCnt.setText(boardVO.getLikeCnt()+"");

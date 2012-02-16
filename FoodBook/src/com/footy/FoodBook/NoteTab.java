@@ -71,7 +71,7 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 //		notetab4 = (LinearLayout)findViewById(R.id.notetab4);
 		
 		titleEdit = (EditText)findViewById(R.id.titleEdit);
-		contentEdit = (EditText)findViewById(R.id.content);
+		contentEdit = (EditText)findViewById(R.id.contentEdit);
 		
 		writeBtn = (ImageButton)findViewById(R.id.writeBtn);
 		writeBtn.setOnClickListener(this);
