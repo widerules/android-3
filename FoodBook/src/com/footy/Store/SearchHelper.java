@@ -74,4 +74,46 @@ public class SearchHelper {
 		}
 		return list;
 	}
+	
+	private static ArrayList<PartyVO> getPartyList(String jsonStr) {
+		ArrayList<PartyVO> list = new ArrayList<PartyVO>();
+		try {
+			JSONObject jobj = new JSONObject(jsonStr);
+			JSONArray jarr = jobj.getJSONArray("data");
+			for(int i=0; i<jarr.length(); i++) {
+				int partyNo = jobj.getInt("party_no");
+				String store = jobj.getString("store");
+				Double latitude = jobj.getDouble("latitude");
+				Double longitude = jobj.getDouble("longtitude");
+				String writer = jobj.getString("writer");
+				String writerId = jobj.getString("writer_id");
+				int memberCnt = jobj.getInt("member_cnt");
+				String regDate = jobj.getString("reg_date");
+				
+				list.add(new PartyVO(partyNo, store, latitude, longitude, writer, writerId, memberCnt, regDate));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	private static ArrayList<PartyMemberVO> getPartyMemberList(String jsonStr) {
+		ArrayList<PartyMemberVO> list = new ArrayList<PartyMemberVO>();
+		try {
+			JSONObject jobj = new JSONObject(jsonStr);
+			JSONArray jarr = jobj.getJSONArray("data");
+			for(int i=0; i<jarr.length(); i++) {
+				int partyNo = jobj.getInt("party_no");
+				String writer = jobj.getString("writer");
+				String writerId = jobj.getString("writer_id");
+				String regDate = jobj.getString("reg_date");
+				
+				list.add(new PartyMemberVO(partyNo, writer, writerId, regDate));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
