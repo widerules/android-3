@@ -5,10 +5,12 @@ public class BoardVO {
 	String writer;
 	String writerId;
 	String title;
+	double latitude;
+	double longitude;
 	String content;
+	String imgUrl;
 	int likeCnt;
 	String regDate;
-	String imgUrl;
 	
 	public BoardVO(int postNo, String writer, String writerId, String title,
 			int likeCnt, String regDate) {
@@ -22,18 +24,21 @@ public class BoardVO {
 	}
 
 	public BoardVO(int postNo, String writer, String writerId, String title,
-			String content, int likeCnt, String regDate, String imgUrl) {
+			double latitude, double longitude, String content, String imgUrl,
+			int likeCnt, String regDate) {
 		super();
 		this.postNo = postNo;
 		this.writer = writer;
 		this.writerId = writerId;
 		this.title = title;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.content = content;
+		this.imgUrl = imgUrl;
 		this.likeCnt = likeCnt;
 		this.regDate = regDate;
-		this.imgUrl = imgUrl;
 	}
-	
+
 	public int getPostNo() {
 		return postNo;
 	}
@@ -82,13 +87,27 @@ public class BoardVO {
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [postNo=" + postNo + ", writer=" + writer
-				+ ", writerId=" + writerId + ", title=" + title + ", content="
-				+ content + ", likeCnt=" + likeCnt + ", regDate=" + regDate
-				+ ", imgUrl=" + imgUrl + "]";
+				+ ", writerId=" + writerId + ", title=" + title + ", latitude="
+				+ latitude + ", longitude=" + longitude + ", content="
+				+ content + ", imgUrl=" + imgUrl + ", likeCnt=" + likeCnt
+				+ ", regDate=" + regDate + "]";
 	}
-
+	
 }
