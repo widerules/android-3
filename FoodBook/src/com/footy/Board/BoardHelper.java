@@ -104,7 +104,6 @@ public class BoardHelper {
 			}
 			boardVO.setImgUrl(path + url);
 			Log.d("myDebug", "최종 저장 url" + boardVO.getImgUrl());
-			
 		}
 		else
 			boardVO.setImgUrl(defaultImg);
@@ -157,11 +156,13 @@ public class BoardHelper {
 			String writer = jobj.getString("writer");
 			String writerId = jobj.getString("writer_id");
 			String title = jobj.getString("title");
-			int likeCnt = jobj.getInt("like_cnt");
+			double latitude = Double.parseDouble(jobj.getString("latitude"));
+			double longitude = Double.parseDouble(jobj.getString("longitude"));
 			String content = jobj.getString("content");
-			String regDate = jobj.getString("reg_date");
 			String imgUrl = jobj.getString("img_url");
-			return new BoardVO(postNo, writer, writerId, title, content, likeCnt, regDate, imgUrl);
+			int likeCnt = jobj.getInt("like_cnt");
+			String regDate = jobj.getString("reg_date");
+			return new BoardVO(postNo, writer, writerId, title, latitude, longitude, content, imgUrl, likeCnt, regDate);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
