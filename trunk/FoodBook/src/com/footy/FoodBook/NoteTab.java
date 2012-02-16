@@ -56,10 +56,11 @@ public class NoteTab extends ListActivity implements OnClickListener {
 	private void doTakePhotoAction() {
 
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		String folder = "ScreenCapture";
 		String url = "tmp_" + String.valueOf(System.currentTimeMillis())
 				+ ".jpg";
 		mImageCaptureUri = Uri.fromFile(new File(Environment
-				.getExternalStorageDirectory(), url));
+				.getExternalStorageDirectory(), folder + url));
 
 		intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
 				mImageCaptureUri);
