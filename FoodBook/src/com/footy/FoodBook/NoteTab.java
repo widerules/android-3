@@ -1,11 +1,13 @@
 package com.footy.FoodBook;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,18 +16,28 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-public class NoteTab extends ListActivity implements OnClickListener {
+import com.footy.Board.BoardAdapter;
+import com.footy.Board.BoardHelper;
+import com.footy.Board.BoardVO;
+import com.footy.Facebook.FacebookInfo;
+
+public class NoteTab extends ListActivity implements OnClickListener, OnItemClickListener {
 	
-	LinearLayout notetab1;
-	LinearLayout notetab2;
-	LinearLayout notetab3;
-	LinearLayout notetab4;
-	
+	BoardHelper boardHelper = new BoardHelper();
+	LinearLayout notetab1, notetab2, notetab3, notetab4;
 	ImageButton writeBtn, prevBtn, cameraBtn;
+	EditText title, content, address;
 	
 	private static final int PICK_FROM_CAMERA = 0;
 	private static final int PICK_FROM_ALBUM = 1;
@@ -33,7 +45,14 @@ public class NoteTab extends ListActivity implements OnClickListener {
 	
 	Uri mImageCaptureUri;
 	ImageView mPhotoImageView;
+	ImageButton saveBtn;
 	
+	String [] name = { "한식", "중식", "일식", "양식", "커피", "패스트푸드" };
+	Spinner spinVw;
+	
+	ListView listView;
+	BoardAdapter boardAdapter;
+	ArrayList<BoardVO> bList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +61,10 @@ public class NoteTab extends ListActivity implements OnClickListener {
 		notetab1 = (LinearLayout)findViewById(R.id.notetab1);
 		notetab2 = (LinearLayout)findViewById(R.id.notetab2);
 		notetab3 = (LinearLayout)findViewById(R.id.notetab3);
+//		notetab4 = (LinearLayout)findViewById(R.id.notetab4);
+		
+		title = (EditText)findViewById(R.id.title);
+		content = (EditText)findViewById(R.id.content);
 		
 		writeBtn = (ImageButton)findViewById(R.id.writeBtn);
 		writeBtn.setOnClickListener(this);
@@ -50,18 +73,40 @@ public class NoteTab extends ListActivity implements OnClickListener {
 		cameraBtn = (ImageButton)findViewById(R.id.cameraBtn);
 		cameraBtn.setOnClickListener(this);
 		mPhotoImageView = (ImageView) findViewById(R.id.cameraImage);
+		saveBtn = (ImageButton)findViewById(R.id.saveBtn);
+		saveBtn.setOnClickListener(this);
 		
+		ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, name);
+		
+		spinVw = (Spinner)findViewById(R.id.spinVw);
+		spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinVw.setPrompt("음식의 종류를 선택하세요.");
+		spinVw.setAdapter(spinAdapter);
+		spinVw.setSelection(0);
+		
+		bList = boardHelper.getList();
+		listView = (ListView)findViewById(android.R.id.list);
+		listView.setOnItemClickListener(this);
+		boardAdapter = new BoardAdapter(getApplicationContext(), R.layout.boardui, bList);
+		listView.setAdapter(boardAdapter);
+		
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		bList = boardHelper.getList();
+		boardAdapter = new BoardAdapter(getApplicationContext(), R.layout.boardui, bList);
+		listView.setAdapter(boardAdapter);
 	}
 	
 	private void doTakePhotoAction() {
 
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		String folder = "ScreenCapture";
 		String url = "tmp_" + String.valueOf(System.currentTimeMillis())
 				+ ".jpg";
 		mImageCaptureUri = Uri.fromFile(new File(Environment
-				.getExternalStorageDirectory(), folder + url));
-
+				.getExternalStorageDirectory(), url));
 		intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
 				mImageCaptureUri);
 		intent.putExtra("return-data", true);
@@ -76,8 +121,6 @@ public class NoteTab extends ListActivity implements OnClickListener {
 		Log.d("mycamera","앨범");
 	}
 	
-	
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode != RESULT_OK) {
@@ -167,7 +210,54 @@ public class NoteTab extends ListActivity implements OnClickListener {
 					.setNeutralButton("앨범선택", albumListener)
 					.setNegativeButton("취소", cancelListener).show();
 			break;
+		case R.id.saveBtn:
+			if(boardHelper.writePost(new BoardVO(0, FacebookInfo.FACEBOOK_NAME, FacebookInfo.FACEBOOK_ID, title.getText().toString().trim(),
+					name[spinVw.getSelectedItemPosition()], 0, 0, content.getText().toString().trim(), getRealImagePath(mImageCaptureUri), 0, null))) {
+				Toast.makeText(getApplicationContext(), "등록 성공", 2000).show();
+				clearLayout2();
+			}
+			else {
+				Toast.makeText(getApplicationContext(), "등록 실패", 2000).show();
+			}
+			break;
 		}
 	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		boardHelper.getContent(bList.get(position).getPostNo());
+//		notetab1.setVisibility(View.GONE);
+//		notetab3.setVisibility(View.VISIBLE);
+		
+	}
+	
+	private void clearLayout2() {
+		title.setText("");
+		spinVw.setSelection(0);
+//		address.setText("");
+		content.setText("");
+		mPhotoImageView.setImageBitmap(null);
+		mImageCaptureUri = null;
+	}
+	
+	/**
+	 * URI로 부터 실제 파일 경로를 가져온다.
+	 * @param uriPath URI : URI 경로
+	 * @return String : 실제 파일 경로
+	 */
+	public String getRealImagePath(Uri uriPath)
+	{
+		String []proj = {MediaStore.Images.Media.DATA};
+		Cursor cursor = managedQuery (uriPath, proj, null, null, null);
+		int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+		cursor.moveToFirst();
+
+		String path = cursor.getString(index);
+		path = path.substring(5);
+
+		return path;
+	}
+	
 	
 }

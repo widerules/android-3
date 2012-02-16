@@ -46,13 +46,14 @@ public class BoardHelper {
 				String writer = jobj.getString("writer");
 				String writerId = jobj.getString("writer_id");
 				String title = jobj.getString("title");
+				String category = jobj.getString("category");
 				int likeCnt = jobj.getInt("like_cnt");
 				String regDate = jobj.getString("reg_date");
 				
 				if( FacebookHelper.isFriend(writerId) )
-					list.add(new BoardVO(postNo, writer, writerId, title, likeCnt, regDate));
+					list.add(new BoardVO(postNo, writer, writerId, title, category, likeCnt, regDate));
 				else if( !Constants.FILTER_BOARD ) 
-					list.add(new BoardVO(postNo, writer, writerId, title, likeCnt, regDate));
+					list.add(new BoardVO(postNo, writer, writerId, title, category, likeCnt, regDate));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -112,6 +113,9 @@ public class BoardHelper {
 		params.add(new BasicNameValuePair("writer", boardVO.getWriter()));
 		params.add(new BasicNameValuePair("writerId", boardVO.getWriterId()));
 		params.add(new BasicNameValuePair("title", boardVO.getTitle()));
+		params.add(new BasicNameValuePair("category", boardVO.getCategory()));
+		params.add(new BasicNameValuePair("latitude", String.valueOf(boardVO.getLatitude())));
+		params.add(new BasicNameValuePair("longitude", String.valueOf(boardVO.getLongitude())));
 		params.add(new BasicNameValuePair("content", boardVO.getContent()));
 		params.add(new BasicNameValuePair("imgUrl", boardVO.getImgUrl()));
 		UrlEncodedFormEntity entity = null;
@@ -156,13 +160,14 @@ public class BoardHelper {
 			String writer = jobj.getString("writer");
 			String writerId = jobj.getString("writer_id");
 			String title = jobj.getString("title");
+			String category = jobj.getString("category");
 			double latitude = Double.parseDouble(jobj.getString("latitude"));
 			double longitude = Double.parseDouble(jobj.getString("longitude"));
 			String content = jobj.getString("content");
 			String imgUrl = jobj.getString("img_url");
 			int likeCnt = jobj.getInt("like_cnt");
 			String regDate = jobj.getString("reg_date");
-			return new BoardVO(postNo, writer, writerId, title, latitude, longitude, content, imgUrl, likeCnt, regDate);
+			return new BoardVO(postNo, writer, writerId, title, category, latitude, longitude, content, imgUrl, likeCnt, regDate);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
