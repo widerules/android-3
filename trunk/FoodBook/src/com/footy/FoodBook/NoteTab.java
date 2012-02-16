@@ -40,7 +40,7 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 	ImageDownloader imageDownloader = new ImageDownloader();
 	
 	LinearLayout notetab1, notetab2, notetab3, notetab4;
-	ImageButton writeBtn, prevBtn, cameraBtn;
+	ImageButton writeBtn, prevBtn, prevBtn2, cameraBtn;
 	EditText titleEdit, contentEdit, address;
 	
 	private static final int PICK_FROM_CAMERA = 0;
@@ -76,7 +76,9 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 		writeBtn = (ImageButton)findViewById(R.id.writeBtn);
 		writeBtn.setOnClickListener(this);
 		prevBtn = (ImageButton)findViewById(R.id.prevBtn);
+		prevBtn2 = (ImageButton)findViewById(R.id.prevBtn2);
 		prevBtn.setOnClickListener(this);
+		prevBtn2.setOnClickListener(this);
 		cameraBtn = (ImageButton)findViewById(R.id.cameraBtn);
 		cameraBtn.setOnClickListener(this);
 		mPhotoImageView = (ImageView) findViewById(R.id.cameraImage);
@@ -121,6 +123,7 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 		intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
 				mImageCaptureUri);
 		intent.putExtra("return-data", true);
+		Log.d("test", mImageCaptureUri.toString());
 		startActivityForResult(intent, PICK_FROM_CAMERA);
 	}
 
@@ -193,6 +196,7 @@ public class NoteTab extends ListActivity implements OnClickListener, OnItemClic
 			notetab2.setVisibility(View.VISIBLE);
 			break;
 		case R.id.prevBtn:
+		case R.id.prevBtn2:
 			notetab1.setVisibility(View.VISIBLE);
 			break;
 		case R.id.cameraBtn:

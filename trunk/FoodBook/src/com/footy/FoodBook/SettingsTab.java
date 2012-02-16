@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ import com.footy.Util.ImageDownloader;
 
 public class SettingsTab extends Activity implements OnClickListener, OnCheckedChangeListener {
 	ImageView profile = null;
-	Button logoutBtn = null;
+	ImageButton logoutBtn = null;
 	Facebook facebook = FacebookInfo.getInstance();
 	SharedPreferences pref = null;
 	
@@ -39,7 +40,7 @@ public class SettingsTab extends Activity implements OnClickListener, OnCheckedC
 		setContentView(R.layout.settingstab);
 		
 		profile = (ImageView)findViewById(R.id.profile);
-		logoutBtn = (Button)findViewById(R.id.logoutBtn);
+		logoutBtn = (ImageButton)findViewById(R.id.logoutBtn);
 		logoutBtn.setOnClickListener(this);
 		
 		ImageDownloader imageDownloader = new ImageDownloader();
