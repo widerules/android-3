@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.footy.FoodBook.R;
 import com.google.android.maps.OverlayItem;
 
 /**
