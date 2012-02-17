@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
@@ -26,12 +27,12 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 
-public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
+public class MyBoardOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 	private ArrayList<OverlayItem> m_overlays = new ArrayList<OverlayItem>();
 	private Context c;
 	
-	public MyItemizedOverlay(Drawable defaultMarker, MapView mapView) {
+	public MyBoardOverlay(Drawable defaultMarker, MapView mapView) {
 		super(boundCenter(defaultMarker), mapView);
 		c = mapView.getContext();
 	}
@@ -56,6 +57,11 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		MapInfo mapInfo = MapInfo.getMapInfo();
 		mapInfo.setAddress(m_overlays.get(index).getTitle());
 		mapInfo.setPoint(m_overlays.get(index).getPoint());
+		
+		Toast.makeText(c, "º¸µå", 2000).show();
+		Intent intent = new Intent("bbb");
+		intent.putExtra("data", index);
+		c.sendBroadcast(intent);
 		return true;
 	}
 	

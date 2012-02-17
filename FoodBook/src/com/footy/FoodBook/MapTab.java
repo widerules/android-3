@@ -18,23 +18,28 @@ package com.footy.FoodBook;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.footy.Board.BoardHelper;
 import com.footy.Board.BoardVO;
-import com.footy.Map.MyItemizedOverlay;
+import com.footy.Map.MyBoardOverlay;
+import com.footy.Map.MyPartyOverlay;
 import com.footy.Store.SearchHelper;
 import com.footy.Store.StoreVO;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
@@ -48,10 +53,12 @@ public class MapTab extends MapActivity {
 	Drawable drawable;
 	Drawable drawable2;
 	OverlayItem overlayItem;
-	MyItemizedOverlay itemizedOverlay;
-	MyItemizedOverlay itemizedOverlay2;
+	MyPartyOverlay partyOverlay;
+	MyBoardOverlay boardOverlay;
 	GeoPoint point;
 	
+	LinearLayout layout1;
+	LinearLayout layout2;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		
@@ -60,6 +67,20 @@ public class MapTab extends MapActivity {
         mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
 		
+		layout1 = (LinearLayout)findViewById(R.id.maptab1);
+		layout2 = (LinearLayout)findViewById(R.id.maptab2);
+
+		BroadcastReceiver myReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				Toast.makeText(context, "브로드캐스팅", 1000).show();
+//				layout1.setVisibility(View.GONE);
+//				layout2.setVisibility(View.VISIBLE);
+			}
+		};
+		IntentFilter filter = new IntentFilter("bbb");
+		registerReceiver(myReceiver, filter);
+
 		
 		final MapController mc = mapView.getController();
 		GeoPoint point = new GeoPoint(37298025, 126972817);  
@@ -69,12 +90,11 @@ public class MapTab extends MapActivity {
 		putBoardMarker();
 	}
 //	
-	
 	public void process(View view){
 		mapOverlays = mapView.getOverlays();
 		//////////////
 		drawable = getResources().getDrawable(R.drawable.marker);
-		itemizedOverlay = new MyItemizedOverlay(drawable, mapView);
+		partyOverlay = new MyPartyOverlay(drawable, mapView);
 		findPlaceTxt = (EditText)findViewById(R.id.findPlaceTxt);
 		String searchPlace = findPlaceTxt.getText().toString();
 		
@@ -84,7 +104,7 @@ public class MapTab extends MapActivity {
 				setMarker(storeVO);
 				
 			}
-			mapOverlays.add(itemizedOverlay);
+			mapOverlays.add(partyOverlay);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -101,14 +121,14 @@ public class MapTab extends MapActivity {
 		point = new GeoPoint((int)intLatitude,(int)intLongitude);
 		Log.d("test", storeVO.toString());
 		overlayItem = new OverlayItem(point, storeVO.getName(), storeVO.getAddr());
-		itemizedOverlay.addOverlay(overlayItem);
+		partyOverlay.addOverlay(overlayItem);
 		
 	}
 	
 	public void putBoardMarker(){
 		mapOverlays = mapView.getOverlays();
 		drawable = getResources().getDrawable(R.drawable.marker2);
-		itemizedOverlay2 = new MyItemizedOverlay(drawable, mapView);
+		boardOverlay = new MyBoardOverlay(drawable, mapView);
 		
 		ArrayList<BoardVO> bList = boardHelper.getList();
 		Log.d("test11", bList.size()+"");
@@ -121,10 +141,11 @@ public class MapTab extends MapActivity {
 		 		point = new GeoPoint((int)intLatitude,(int)intLongitude);
 				Log.d("test11", boardVO.toString());
 				overlayItem = new OverlayItem(point, boardVO.getTitle(), boardVO.getContent());
-				itemizedOverlay2.addOverlay(overlayItem);
+				boardOverlay.addOverlay(overlayItem);
+				
 				
 			}
-			mapOverlays.add(itemizedOverlay2);
+			mapOverlays.add(boardOverlay);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
