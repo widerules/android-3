@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        >
+        android:visibility="visible" >
 
         <ImageView
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:id="@+id/mapview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:apiKey="0GfogcjRrY0VMzogc2QMF1WkMC_8bQcaKgSiM0A"
+            android:apiKey="0NV-bK5zvX7iKRTqGiD85DaAM4b1DbhofVNQz4A"
             android:clickable="true" />
     </LinearLayout>
 
