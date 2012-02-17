@@ -68,7 +68,7 @@ public class MapTab extends MapActivity {
 		mapView.setBuiltInZoomControls(true);
 		
 		layout1 = (LinearLayout)findViewById(R.id.maptab1);
-		layout2 = (LinearLayout)findViewById(R.id.maptab2);
+//		layout2 = (LinearLayout)findViewById(R.id.maptab2);
 
 		BroadcastReceiver myReceiver = new BroadcastReceiver() {
 			@Override
